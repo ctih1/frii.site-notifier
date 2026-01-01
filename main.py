@@ -1,14 +1,8 @@
 import discord, os, json, traceback
 from discord.ext import commands
 
-intents = discord.Intents.default()
-intents.messages = True
-intents.presences = True
-intents.members = True
-intents.message_content = True
-bot = commands.Bot(command_prefix=PREFIX, intents=intents)
+print("Thank you for participating in this Aperture Science computer-aided enrichment activity!")
 
-import json
 with open("settings.json", "r", encoding="utf-8") as f:
     settings = json.load(f)
 
@@ -19,6 +13,14 @@ MAXWARNS = settings["administration"]["maximum_warnings"]
 STATUS = settings["branding"]["status"].lower()
 ACTIVITYTYPE = settings["branding"]["activity"]["type"].lower()
 ACTIVITY = settings["branding"]["activity"]["content"]
+
+
+intents = discord.Intents.default()
+intents.messages = True
+intents.presences = True
+intents.members = True
+intents.message_content = True
+bot = commands.Bot(command_prefix=PREFIX, intents=intents)
 
 statuses = {
     "online": discord.Status.online,
