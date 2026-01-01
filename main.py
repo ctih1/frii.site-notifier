@@ -57,53 +57,6 @@ async def load_cogs(folder="commands"):
                     print(f"Failed: {path} -> {e}")
                     traceback.print_exc()
 
-async def log_command(interaction, event="on_command", error=None, filename=None):
-    try:
-        cmd_name = interaction.command.name
-
-        data = {
-            "type": event,
-            "user": str(interaction.user),
-            "user_id": interaction.user.id,
-            "command": str(cmd_name),
-            "time": str(interaction.created_at)
-        }
-
-        if error:
-            data["error"] = str(error)
-            if filename:
-                data["file"] = filename
-
-        logs = []
-        if os.path.exists("logs.json"):
-            try:
-                with open("logs.json") as f:
-                    logs = json.load(f)
-            except json.JSONDecodeError:
-                pass
-
-        logs.append(data)
-
-        with open("logs.json", "w") as f:
-            json.dump(logs, f, indent=4)
-    except Exception:
-        pass
-
-@bot.event
-async def on_interaction(ctx): await log_command(ctx)
-
-@bot.event
-async def on_interaction_error(ctx, error):
-    if isinstance(error, commands.CommandInvokeError): error = error.original
-    tb = traceback.extract_tb(error.__traceback__) or [("Unknown",0,"Unknown","Unknown")]
-    filename, lineno, _, _ = tb[-1]
-    await log_command(ctx, "on_command_error", error, f"{filename} Line:{lineno}")
-    await ctx.send(embed=discord.Embed(
-        title="Error!",
-        description=f"{error}\n{filename}\nLine: {lineno}",
-        colour=discord.Colour.red()
-    ))
-
 @bot.event
 async def setup_hook(): 
     await load_cogs()
