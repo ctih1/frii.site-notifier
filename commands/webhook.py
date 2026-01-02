@@ -44,8 +44,13 @@ class notify_api(commands.Cog):
             
         mfa = "Yes" if data.get("mfa-triggered") else "No"
 
-        login_type = "username and password"
-        invalid_password = "Invalid password" if data.get("login-stage") == "password" else "Authentication failure"
+        login_type = "Username and password"
+        invalid_password = None
+
+        if data.get("login-stage") == "password":
+            invalid_password = "Invalid password"
+        elif data.get("login-stage") == "session":
+            invalid_password =  "Authentication failure"
 
         embed = discord.Embed(
             title="Login Notification",
