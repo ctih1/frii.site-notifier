@@ -54,7 +54,7 @@ class general(commands.Cog):
         embed.add_field(name="Login Type", value="Username and password", inline=True)
         embed.add_field(name="\u200b", value="Authentication failure", inline=False)
 
-        interaction.user.send(embed=embed)
+        await interaction.user.send(embed=embed)
 
 
 async def setup(bot):
