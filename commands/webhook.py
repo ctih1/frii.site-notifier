@@ -64,7 +64,7 @@ class notify_api(commands.Cog):
         embed.add_field(name="Success", value=success, inline=True)
         embed.add_field(name="2FA Triggered", value=mfa, inline=True)
         embed.add_field(name="Login Type", value=login_type, inline=True)
-        if invalid_password:
+        if invalid_password and not success:
             embed.add_field(name="\u200b", value=invalid_password, inline=False)
 
         try:
