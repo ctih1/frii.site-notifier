@@ -6,3 +6,5 @@ services:
       - .:/app   # Mounts your code so changes reflect instantly
     command: python main.py
     restart: unless-stopped
+    ports:
+      - 9898:9898
