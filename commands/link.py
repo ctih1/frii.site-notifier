@@ -30,7 +30,6 @@ class general(commands.Cog):
                     )
 
     @app_commands.command(name="send-test")
-    @app_commands.describe(code="link code")
     async def send_test(self, interaction: discord.Interaction):
         data = {
             "ip": "192.168.32.1",
@@ -39,7 +38,7 @@ class general(commands.Cog):
             "mfa-triggered": True,
             "login-type": "password",
             "login-stage": "session"
-        }
+        }   
 
         embed = discord.Embed(
             title="Login Notification",
