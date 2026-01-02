@@ -21,5 +21,6 @@ class general(commands.Cog):
                     str(resp.status),
                     ephemeral=True
                 )
+                
 async def setup(bot):
     await bot.add_cog(general(bot))

@@ -1,12 +1,19 @@
 import discord, os, json, traceback
 from discord.ext import commands
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+
 print("Thank you for participating in this Aperture Science computer-aided enrichment activity!")
 
 with open("settings.json", "r", encoding="utf-8") as f:
     settings = json.load(f)
 
-TOKEN = settings["bot"]["token"]
+TOKEN = os.environ["DC_TOKEN"]
 PREFIX = settings["bot"]["prefix"]
 MAXWARNS = settings["administration"]["maximum_warnings"]
 

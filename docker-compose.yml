@@ -1,0 +1,8 @@
+services:
+  notifier:
+    build: .
+    container_name: fs_bot
+    volumes:
+      - .:/app   # Mounts your code so changes reflect instantly
+    command: python main.py
+    restart: unless-stopped
