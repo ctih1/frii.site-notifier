@@ -17,10 +17,16 @@ class general(commands.Cog):
 
         async with aiohttp.ClientSession() as session:
             async with session.post(url) as resp:
-                await interaction.response.send_message(
-                    str(resp.status),
-                    ephemeral=True
-                )
+                if resp.status == 200:
+                    await interaction.response.send_message(
+                        "Successfully linked account!",
+                        ephemeral=True
+                    )
+                else:
+                    await interaction.response.send_message(
+                        f"Failed to link account with status code: {resp.status}. Please contact support (or ping me @ctih)",
+                        ephemeral=True
+                    )
 
 async def setup(bot):
     await bot.add_cog(general(bot))
