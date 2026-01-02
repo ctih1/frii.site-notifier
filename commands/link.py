@@ -55,6 +55,10 @@ class general(commands.Cog):
         embed.add_field(name="\u200b", value="Authentication failure", inline=False)
 
         await interaction.user.send(embed=embed)
+        await interaction.response.send_message(
+            "Done! You should have gotten a direct message from this bot.",
+            ephemeral=True
+        )
 
 
 async def setup(bot):
