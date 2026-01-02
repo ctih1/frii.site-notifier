@@ -11,7 +11,7 @@ class general(commands.Cog):
     @app_commands.describe(code="link code")
     async def link(self, interaction: discord.Interaction, code: str):
         url = (
-            "http://koti.frii.site:8000/discord/link"
+            "http://beta.frii.site/discord/link"
             f"?code={code}&discord_id={interaction.user.id}"
         )
 
@@ -21,6 +21,6 @@ class general(commands.Cog):
                     str(resp.status),
                     ephemeral=True
                 )
-                
+
 async def setup(bot):
     await bot.add_cog(general(bot))
