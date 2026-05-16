@@ -21,22 +21,22 @@ class general(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.post(url) as resp:
                 if resp.status == 200:
-                    await interaction.response.send_message(
+                    await interaction.followup.send(
                         "Successfully linked account!",
                         ephemeral=True
                     )
                 elif resp.status == 404:
-                    await interaction.response.send_message(
+                    await interaction.followup.send(
                         f"Failed to link account, code not found!",
                         ephemeral=True
                     )
                 elif resp.status == 409:
-                    await interaction.response.send_message(
+                    await interaction.followup.send(
                         f"Account has already been linked.",
                         ephemeral=True
                     )
                 else:
-                    await interaction.response.send_message(
+                    await interaction.followup.send(
                         f"Failed to link account with status code: {resp.status}. Please contact support (or ping me @ctih)",
                         ephemeral=True
                     )
