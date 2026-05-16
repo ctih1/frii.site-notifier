@@ -12,15 +12,27 @@ class general(commands.Cog):
     @app_commands.describe(code="link code")
     async def link(self, interaction: discord.Interaction, code: str):
         url = (
-            "http://beta.frii.site/discord/link"
+            "http://api.frii.site/discord/link"
             f"?code={code}&discord_id={interaction.user.id}"
         )
+
+        await interaction.response.defer()
 
         async with aiohttp.ClientSession() as session:
             async with session.post(url) as resp:
                 if resp.status == 200:
                     await interaction.response.send_message(
                         "Successfully linked account!",
+                        ephemeral=True
+                    )
+                elif resp.status == 404:
+                    await interaction.response.send_message(
+                        f"Failed to link account, code not found!",
+                        ephemeral=True
+                    )
+                elif resp.status == 409:
+                    await interaction.response.send_message(
+                        f"Account has already been linked.",
                         ephemeral=True
                     )
                 else:
