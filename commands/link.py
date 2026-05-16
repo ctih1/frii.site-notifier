@@ -16,7 +16,7 @@ class general(commands.Cog):
             f"?code={code}&discord_id={interaction.user.id}"
         )
 
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral=True)
 
         async with aiohttp.ClientSession() as session:
             async with session.post(url) as resp:
